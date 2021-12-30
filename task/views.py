@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import View
 
+from .models import Task
+
 
 class TaskView(View):
     def get(self, request):
-        return render(request, "task_list.html", context={"name": "テスト"})
+        params = {}
+        params["task"] = Task.objects.all()
+        return render(request, "task_list.html", params)
