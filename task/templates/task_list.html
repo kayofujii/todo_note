@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="app">
-  {% comment %} <form method="POST">
-    {% csrf_token %}
+  <form @submit.prevent="createTask">
     <div class="form-group row">
         <div class="col-9">
-            {{ form.title }}
+            <input type="text" class="form-control" v-model="task.title" placeholder="卵を買う">
         </div>
         <div class="col-3">
             <button type="submit" class="btn btn-primary mt-auto">タスクを追加</button>
         </div>
     </div>
-  </form> {% endcomment %}
+  </form>
 
   <div class="mt-5">
     <div class="card mb-2" v-for="task, index in tasks">
