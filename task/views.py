@@ -35,3 +35,9 @@ class TaskView(View):
             task.completed = True
         task.save()
         return JsonResponse(model_to_dict(task))
+
+    def delete(self, request):
+        response = json.loads(request.body)
+        task = Task.objects.get(id=response.get("id"))
+        task.delete()
+        return JsonResponse({"result": "Ok"})
