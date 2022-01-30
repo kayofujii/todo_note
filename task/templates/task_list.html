@@ -16,8 +16,9 @@
     <div class="card mb-2" v-for="task, index in tasks">
       <div class="card-body">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" />
-          <label class="form-check-label">
+          {# 追加 #}
+          <input class="form-check-input" type="checkbox" v-model="task.completed" v-on:change="updateTask(task)">
+          <label class="form-check-label" :class="{'completed': task.completed}">
             [[ task.title ]]
           </label>
           <button type="button" class="close float-right">

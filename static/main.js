@@ -9,46 +9,49 @@ const App = {
         delimiters: ['[[', ']]'],
     },
     methods: {
-        getTasks(){
-            fetch(URL, {
-                method: 'get',
-                headers: {
-                    'Content-Type':  'application/json',
-                },
+        sendRequest(url, method, data){
+            const csrftoken = Cookies.get('csrftoken');
+            const myHeaders = new Headers({
+                'Content-Type': 'application/json',
+            });
+            if(method !== 'get'){
+                myHeaders.set('X-CSRFToken', csrftoken)
+            };
+
+            fetch(url, {
+                method: method,
+                headers: myHeaders,
+                body: data,
             })
             .then((response) => {
                 return response.json();
             })
-            .then((tasks_list) => {
-                this.tasks = tasks_list;
+            .then((response) => {
+                if (method == 'get') {
+                    this.tasks = response;
+                };
+                if (method == 'post') {
+                    this.task.title = ''
+                    this.getTasks();
+                };
+                if (method == 'put') {
+                    this.getTasks();
+                };
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
         },
-        // 追加
+        getTasks(){
+            this.sendRequest(URL, 'get');
+        },
         createTask(){
-            const csrftoken = Cookies.get('csrftoken');
             this.getTasks();
-            fetch(URL, {
-                method: 'post',
-                headers: {
-                    'Content-Type':  'application/json',
-                    'X-CSRFToken': csrftoken,
-                },
-                body:JSON.stringify(this.task),
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((task) => {
-                console.log(task)
-                this.task.title = ''
-                this.getTasks();
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+            this.sendRequest(URL, 'post',JSON.stringify(this.task));
+        },
+        updateTask(task){
+            this.getTasks();
+            this.sendRequest(URL, 'put',JSON.stringify(task));
         },
     },
     created() {
