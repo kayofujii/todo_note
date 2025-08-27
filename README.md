@@ -1,7 +1,7 @@
 # 📝 Simple Todo App with Django and Vue.js
 
 This tutorial guides you through building a Single Page Application (SPA) Todo app using Django and Vue.js. The approach avoids the complexities of Django REST Framework by using the Fetch API to connect Vue.js with Django.
-
+![main](./images/main.png)
 ---
 
 ## 🚀 Features
