@@ -19,7 +19,7 @@ The approach avoids the complexities of Django REST Framework by using the Fetch
 
 | Task List | Add Task | Delete Task | Mark Completed |
 |-----------|---------|------------|----------------|
-| ![Task List](./images/task-list.png) | ![Add Task](./images/add-task.png) | ![Delete Task](./images/delete-task.png) | ![Mark Completed](./images/mark-completed.png) |
+| <img src="./images/task-list.png" width="200"> | <img src="./images/add-task.png" width="200"> | <img src="./images/delete-task.png" width="200"> | <img src="./images/mark-completed.png" width="200"> |
 
 *Replace the placeholder paths (`./images/...`) with your actual image files.*
 
